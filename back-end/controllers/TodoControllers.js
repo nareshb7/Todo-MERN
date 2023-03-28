@@ -21,3 +21,8 @@ module.exports.deleteTodo = async (req,res)=> {
     .then((data)=> res.send(data))
     .catch(err=> res.send(err))
 }
+module.exports.deleteAll = async (req,res)=> {
+    await TodoModel.deleteMany({})
+    .then(data => res.send(data))
+    .catch(err => res.send(err))
+}

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import AddTodo from './components/AddTodo';
 import Todo from './components/Todo';
-import CookieComp from './components/cookie/Cookie';
 
-function App() {
+function Home() {
+
   const [todos, setTodos] = useState([])
   const [render,setRender] = useState(true)
   const [isUpdate, setIsUpdate] = useState({ text: '', state: false })
@@ -12,10 +12,10 @@ function App() {
     await axios.post('http://localhost:5050/save', { text: todo })
       .then(() => console.log('Added Sucessfully'))
       .catch((err) => console.log(err, 'error'))
-    setIsUpdate({...isUpdate, text: {text:'', id: Math.random()}})
+    setIsUpdate({...isUpdate, text: {text:''}})
     setRender(!render)
   }
-  
+
   const updateTodo =async (id, text) => {
     await axios.post('http://localhost:5050/update', { id, text })
       .then((res) => console.log(res.data, 'res'))
@@ -45,9 +45,6 @@ function App() {
     .catch(err => console.log('Dlt all error'))
     setRender(!render)
   }
-  useEffect(()=> {
-    deleteAll()
-  },[])
   useEffect(() => {
     getData()
   }, [render])
@@ -66,4 +63,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
